@@ -54,9 +54,7 @@ the full documentation on how to access and use the API.
 
 - Entity Framework Core
     This API makes use of an in memory database. It does this with the help of the Entity Framework Core library. All database related tasks are performed usig the 
-    Entity Framework Core library. All database related tasks are in the Infrastructure layer, so if we decide to stop using a database we can change that one layer without
-    interferring with anything in Application layer. The business logic layer does not know how we store the data, so we can change that easily at will. That is one of the
-    advantages of using clean architecture. You can find more information about Entity Framework Core in memory database here 
+    Entity Framework Core library. You can find more information about Entity Framework Core in memory database here 
     "https://stormpath.com/blog/tutorial-entity-framework-core-in-memory-database-asp-net-core"
 
 - Serilog
@@ -69,10 +67,7 @@ the full documentation on how to access and use the API.
     swagger in dotenet core you can visit this link "https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-nswag?view=aspnetcore-3.1&tabs=visual-studio".
 
 - XUnit and Moq
-    This API makes use of XUnit and Moq for all its unit tests. There are Application and Integration unit tests. The Application tests are only to test the flow of the code and 
-    to ensure that you can reach all code paths with the corresponding conditions. The Integration tests are meant to test the actual responses from the API controller when you call
-    an endpoint. XUnit is used to label any test methods as well as to Assert any values. Moq is used to mock the Infrastructure services, so that you can specify what kind of result
-    it should return. You can also verify how many times a method should be called using Moq. For more infomation on XUnit you can go here "https://xunit.net/". For more information 
+    This API makes use of XUnit and Moq for all its unit tests. There are Application unit tests. The Application tests are only to test the flow of the code and 
+    to ensure that you can reach all code paths with the corresponding conditions. XUnit is used to label any test methods as well as to Assert any values. Moq is used to mock the Infrastructure services, so that you can specify what kind of result it should return. You can also verify how many times a method should be called using Moq. For more infomation on XUnit you can go here "https://xunit.net/". For more information 
     on Moq you can go here "https://github.com/moq/moq4". All the unit tests are arranged using the Arrange Act Assert pattern. You can read up more about this pattern
-    here "https://docs.telerik.com/devtools/justmock/basic-usage/arrange-act-assert". All unit tests can be run directly from Visual Studio. If any integration tests fail, you can try 
-    rerun them on their own.
+    here "https://docs.telerik.com/devtools/justmock/basic-usage/arrange-act-assert". All unit tests can be run directly from Visual Studio.
