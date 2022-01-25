@@ -1,0 +1,89 @@
+<h1 id="tableLabel">Employee Details</h1>
+
+<br />
+
+<p *ngIf="!employees"><em>Loading...</em></p>
+
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-3"></div>
+  <div class="col-md-3"></div>
+  <div class="col-md-3">
+    <form class="form-inline waves-light" mdbWavesEffect>
+      <div class="md-form mt-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Employee Number" id="employeeNumber" name="employeeNumber" [(ngModel)]="employeeNumber">
+        <button class="btn btn-dark" (click)="EmployeeSearch(employeeNumber)">Search</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<br />
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="employees">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Birth Date</th>
+      <th>Employee Number</th>
+      <th>Employed Date</th>
+      <th>Termination Date</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of employees">
+      <td>
+        <span *ngIf="!employee.editable">{{employee.firstName}}</span>
+        <input type="text" class="form-control" [(ngModel)]="employee.firstName" *ngIf="employee.editable" />
+      </td>
+      <td>
+        <span *ngIf="!employee.editable">{{employee.lastName}}</span>
+        <input type="text" class="form-control" [(ngModel)]="employee.lastName" *ngIf="employee.editable" />
+      </td>
+      <td>
+        <span *ngIf="!employee.editable">{{employee.birthDate | date:'mediumDate'}}</span>
+        <input type="text" class="form-control" [(ngModel)]="employee.birthDate" *ngIf="employee.editable" />
+      </td>
+      <td>
+        <span *ngIf="!employee.editable">{{employee.employeeNum}}</span>
+        <input type="text" class="form-control" [(ngModel)]="employee.employeeNum" *ngIf="employee.editable" />
+      </td>
+      <td>
+        <span *ngIf="!employee.editable">{{employee.employedDate | date:'mediumDate'}}</span>
+        <input type="text" class="form-control" [(ngModel)]="employee.employedDate" *ngIf="employee.editable" />
+      </td>
+      <td>
+        <span *ngIf="!employee.editable">{{employee.terminatedDate | date:'mediumDate'}}</span>
+        <input type="text" class="form-control" [(ngModel)]="employee.terminatedDate" *ngIf="employee.editable" />
+      </td>
+      <td><button class="btn btn-primary" (click)="Update(employee)">{{ !employee.editable ? 'Update' : 'Save'}}</button></td>
+      <td><button class="btn btn-danger" (click)="Delete(employee)" *ngIf="!employee.editable">Delete</button></td>
+    </tr>
+    <tr>
+      <td><input type="text" class="form-control" [(ngModel)]="newEmployee.firstName" *ngIf="newEmployee.editable" placeholder="John"/></td>
+      <td><input type="text" class="form-control" [(ngModel)]="newEmployee.lastName" *ngIf="newEmployee.editable" placeholder="Doe"/></td>
+      <td><input type="text" class="form-control" [(ngModel)]="newEmployee.birthDate" *ngIf="newEmployee.editable" placeholder="YYYY-MM-DD"/></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><button class="btn btn-success" (click)="SaveNewEmployee(newEmployee)" *ngIf="newEmployee.editable" style="width:80px">Save</button></td>
+      <td><button class="btn btn-warning" (click)="CancelAddingEmployee(newEmployee)" *ngIf="newEmployee.editable">Cancel</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="col-md-3">
+    <button class="btn btn-success" (click)="AddEmployee(newEmployee)" [disabled]="isDisabled">Add Employee</button>
+  </div>
+  <div class="col-md-3"></div>
+  <div class="col-md-3"></div>
+  <div class="col-md-1"></div>
+  <div class="col-md-2">
+    <button class="btn btn-primary" (click)="GetAllEmployeeData()">Load All Employees</button>
+  </div>
+</div>
+     
