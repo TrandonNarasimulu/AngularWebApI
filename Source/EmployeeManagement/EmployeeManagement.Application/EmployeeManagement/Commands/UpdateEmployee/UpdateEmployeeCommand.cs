@@ -30,7 +30,7 @@ namespace EmployeeManagement.Application.EmployeeManagement.Commands.UpdateEmplo
 
         public async Task<Unit> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var employeeEntity = await _context.Employees.FirstOrDefaultAsync(x => x.EmployeeNum == request.EmployeeNum);
+            var employeeEntity = await _context.Employees.SingleOrDefaultAsync(x => x.EmployeeNum == request.EmployeeNum);
             if (employeeEntity == null)
             {
                 throw new NotFoundException(nameof(Employee), request.EmployeeNum);

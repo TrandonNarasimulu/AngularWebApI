@@ -32,7 +32,7 @@ namespace EmployeeManagement.Application.EmployeeManagement.Queries.GetAllEmploy
 
             foreach(var employee in employees)
             {
-                var personEntity = await _context.Persons.FirstOrDefaultAsync(x => x.Id == employee.PersonId);
+                var personEntity = await _context.Persons.SingleOrDefaultAsync(x => x.Id == employee.PersonId);
                 if (personEntity == null)
                 {
                     throw new NotFoundException(nameof(Person), employee.PersonId.ToString());

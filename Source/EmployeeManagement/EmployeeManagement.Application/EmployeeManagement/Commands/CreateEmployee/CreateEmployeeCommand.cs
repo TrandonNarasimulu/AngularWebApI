@@ -30,11 +30,11 @@ namespace EmployeeManagement.Application.EmployeeManagement.Commands.CreateEmplo
 
         public async Task<CreateEmployeeViewModel> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var personEntity = await _context.Persons.FirstOrDefaultAsync(x => x.FirstName == request.FirstName 
+            var personEntity = await _context.Persons.SingleOrDefaultAsync(x => x.FirstName == request.FirstName 
                                                                             && x.LastName == request.LastName);
             if (personEntity != null)
             {
-                var employeeEntity = await _context.Employees.FirstOrDefaultAsync(x => x.PersonId == personEntity.Id);
+                var employeeEntity = await _context.Employees.SingleOrDefaultAsync(x => x.PersonId == personEntity.Id);
                 return new CreateEmployeeViewModel { EmployeeNumber = employeeEntity.EmployeeNum };
             }
 
@@ -92,7 +92,7 @@ namespace EmployeeManagement.Application.EmployeeManagement.Commands.CreateEmplo
 
         private async Task<bool> EmployeeNumberExists(string employeeNumber)
         {
-            var entity = await _context.Employees.FirstOrDefaultAsync(x => x.EmployeeNum == employeeNumber);
+            var entity = await _context.Employees.SingleOrDefaultAsync(x => x.EmployeeNum == employeeNumber);
 
             return entity != null;
         }

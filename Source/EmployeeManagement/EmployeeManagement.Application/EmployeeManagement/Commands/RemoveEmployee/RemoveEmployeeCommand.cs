@@ -17,20 +17,20 @@ namespace EmployeeManagement.Application.EmployeeManagement.Commands.RemoveEmplo
     {
         private readonly IEmployeeManagementDbContext _context;
 
-        public RemoveEmployeeCommandHandler(IEmployeeManagementDbContext context, IMath math, IDateTime dateTime)
+        public RemoveEmployeeCommandHandler(IEmployeeManagementDbContext context)
         {
             _context = context;
         }
 
         public async Task<Unit> Handle(RemoveEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var employeeEntity = await _context.Employees.FirstOrDefaultAsync(x => x.EmployeeNum == request.EmployeeNumber);
+            var employeeEntity = await _context.Employees.SingleOrDefaultAsync(x => x.EmployeeNum == request.EmployeeNumber);
             if(employeeEntity == null)
             {
                 return Unit.Value;
             }
 
-            var personEntity = await _context.Persons.FirstOrDefaultAsync(x => x.Id == employeeEntity.PersonId);
+            var personEntity = await _context.Persons.SingleOrDefaultAsync(x => x.Id == employeeEntity.PersonId);
             if(personEntity == null)
             {
                 throw new NotFoundException(nameof(Person), employeeEntity.PersonId.ToString());
